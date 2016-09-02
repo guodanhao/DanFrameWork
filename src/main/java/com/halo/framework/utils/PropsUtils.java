@@ -1,6 +1,5 @@
 package com.halo.framework.utils;
 
-import org.jetbrains.annotations.Contract;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,7 +44,6 @@ public class PropsUtils {
      * @param pathCustom 自定义配置项，传入null默认加载配置文件key
      * @return value
      */
-    @Contract("_, _, !null -> !null")
     public static String getString(Properties properties, String key, String pathCustom){
         if (pathCustom != null){
             return pathCustom;
