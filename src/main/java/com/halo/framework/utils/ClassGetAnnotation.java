@@ -22,14 +22,12 @@ public class ClassGetAnnotation {
         return cls;
     }
 
-    public static void main(String[] arg) {
+    public static void main(String[] arg) throws NoSuchFieldException, IllegalAccessException {
         Class<?> test = loadAnnotationClass("test", false);
         Annotation annotations[] = test.getAnnotations();
         test.getDeclaredAnnotations();
-        try {
-            Field field = test.getDeclaredField("name");
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
+        Field field = test.getDeclaredField("name");
+        field.set(new String(), "name1");
+        System.out.println(test.getName());
     }
 }

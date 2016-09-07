@@ -8,7 +8,9 @@ import java.lang.annotation.Target;
 /**
  * Created by muxi on 2016/9/2.
  */
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Action {
+
+    String value();
 }
