@@ -21,32 +21,49 @@ public final class ClassUtil {
 
     /**
      * 获得当前线程中的类加载器
+     *
      * @return
      */
     public static ClassLoader getClassLoader() {
         return Thread.currentThread().getContextClassLoader();
     }
 
+    /**
+     * 加载类
+     * @param className
+     * @param isInitialized
+     * @return
+     */
     public static Class<?> loadClass(String className, boolean isInitialized) {
         Class<?> cls;
         try {
             cls = Class.forName(className, isInitialized, getClassLoader());
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return cls;
     }
 
+    /**
+     *
+     * @param className
+     * @return
+     */
     public static Class<?> loadClass(String className) {
         Class<?> cls;
         try {
             cls = Class.forName(className);
-        } catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
         return cls;
     }
 
+    /**
+     * 获得包名下的所有class，包括jar里面的class
+     * @param packageName
+     * @return
+     */
     public static Set<Class<?>> getClassSet(String packageName) {
         Set<Class<?>> classSet = new HashSet<Class<?>>();
         try {
@@ -56,16 +73,16 @@ public final class ClassUtil {
 
                 URL url = urls.nextElement();
 
-                if (url != null){
+                if (url != null) {
                     String protocol = url.getProtocol();
-                    if ("file".equals(protocol) ){
+                    if ("file".equals(protocol)) {
 
                         String packagePath = url.getPath().replace("%20", " ");
                         addClass(classSet, packagePath, packageName);
 
-                    }else if ("jar".equals(protocol)){
-                        JarURLConnection  jarURLConnection = (JarURLConnection) url.openConnection();
-                        if (jarURLConnection != null ) {
+                    } else if ("jar".equals(protocol)) {
+                        JarURLConnection jarURLConnection = (JarURLConnection) url.openConnection();
+                        if (jarURLConnection != null) {
 
                             JarFile jarFile = jarURLConnection.getJarFile();
 
@@ -89,11 +106,17 @@ public final class ClassUtil {
                 }
             }
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
-        return null;
+        return classSet;
     }
 
+    /**
+     * 遍历package，将packageName，class放到classSet中
+     * @param classSet
+     * @param packagePath
+     * @param packageName
+     */
     public static void addClass(Set<Class<?>> classSet, String packagePath, String packageName) {
 
         File[] files = new File(packagePath).listFiles(new FileFilter() {
@@ -102,7 +125,7 @@ public final class ClassUtil {
             }
         });
 
-        for (File file: files) {
+        for (File file : files) {
 
             String fileName = file.getName();
 
@@ -111,7 +134,7 @@ public final class ClassUtil {
                 String className = fileName.substring(0, fileName.lastIndexOf("."));
 
                 if (StringUtils.isNotEmpty(packageName)) {
-                    className = packageName + "." +className;
+                    className = packageName + "." + className;
                 }
 
                 doAddClass(classSet, className);
@@ -119,12 +142,12 @@ public final class ClassUtil {
 
                 String subPackagePath = fileName;
                 if (StringUtils.isNotEmpty(packagePath)) {
-                    subPackagePath = packagePath + "/" +subPackagePath;
+                    subPackagePath = packagePath + "/" + subPackagePath;
                 }
 
                 String subPackageName = fileName;
                 if (StringUtils.isNotEmpty(packageName)) {
-                    subPackageName = packageName + "." +subPackageName;
+                    subPackageName = packageName + "." + subPackageName;
                 }
                 addClass(classSet, subPackagePath, subPackageName);
             }
