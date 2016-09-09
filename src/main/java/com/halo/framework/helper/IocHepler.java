@@ -22,7 +22,9 @@ public class IocHepler {
             Field[] beanFields = beanClass.getDeclaredFields();
             if (ArrayUtils.isNotEmpty(beanFields)) {
                 for ( Field beanField : beanFields) {
-
+                    /**
+                     * 找到被注释的Field
+                     */
                     if (beanField.isAnnotationPresent(Inject.class)) {
                         Class<?> beanFieldClass = beanField.getType();
 
