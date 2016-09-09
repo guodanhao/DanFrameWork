@@ -1,6 +1,7 @@
 package com.halo.framework.helper;
 
 import com.halo.framework.utils.ClassUtil;
+import com.halo.framework.utils.ReflectionUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,8 +17,7 @@ public class BeanHelper {
     static {
         Set<Class<?>> beanClassSet = ClassUtil.getClassSet("xxx");
         for (Class<?> cls: beanClassSet ) {
-            Object obj = null;
-//                    ReflectionU
+            Object obj = ReflectionUtil.getInstance(cls);
             BEAN_MAP.put(cls, obj);
         }
     }
