@@ -1,5 +1,6 @@
-package com.halo.framework;
+package com.halo.framework.helper;
 
+import com.halo.framework.ConfigConstans;
 import com.halo.framework.utils.PropsUtils;
 
 import java.util.Properties;
