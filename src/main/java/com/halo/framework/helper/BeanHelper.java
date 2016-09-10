@@ -15,7 +15,7 @@ public class BeanHelper {
     private static final Map<Class<?>, Object> BEAN_MAP = new HashMap<Class<?>, Object>();
 
     static {
-        Set<Class<?>> beanClassSet = ClassUtil.getClassSet("xxx");
+        Set<Class<?>> beanClassSet = ClassHelper.getBeanClassSet();
         for (Class<?> cls: beanClassSet ) {
             Object obj = ReflectionUtil.getInstance(cls);
             BEAN_MAP.put(cls, obj);
