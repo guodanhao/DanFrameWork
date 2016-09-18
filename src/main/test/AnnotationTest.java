@@ -5,7 +5,7 @@ import com.halo.framework.annotation.Action;
  */
 public class AnnotationTest {
 
-    @Action(value = "name")
+    //@Action(value = "name")
     public String testName;
 
     public String getTestName() {
