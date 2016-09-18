@@ -15,7 +15,16 @@ public class Param {
         this.paramMap = paramMap;
     }
 
+    /**
+     * 获得param中的value
+     * @param name
+     * @return
+     */
     public long getLong(String name) {
-        return 1L;
+        return CastUtil.castLong(paramMap.get(name));
+    }
+
+    public Map<String, Object> getParamMap() {
+        return paramMap;
     }
 }
