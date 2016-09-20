@@ -27,3 +27,5 @@ public static long castLong(Object obj, long defaultValue) {
         return longValue;
     }
 ```
+## servlet和spring mvc的不同
+    spring mvc 就是把servlet进行了一次封装。利用了dispatcherServlet和handler的体系

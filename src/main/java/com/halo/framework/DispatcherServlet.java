@@ -1,6 +1,9 @@
 package com.halo.framework;
 
+import com.halo.framework.bean.Handler;
+import com.halo.framework.helper.BeanHelper;
 import com.halo.framework.helper.ConfigHelper;
+import com.halo.framework.helper.ControllerHepler;
 import com.halo.framework.helper.HelperLoader;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -11,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by guodanhao on 16-9-19.
@@ -31,7 +37,7 @@ public class DispatcherServlet extends HttpServlet {
         /**
          * servlet这边有个回调函数
          */
-        ServletContext servletContext = servletConfig().getServletContext();
+        ServletContext servletContext = servletConfig.getServletContext();
 
         ServletRegistration jspServlet = servletContext.getServletRegistration("jsp");
 
@@ -42,16 +48,23 @@ public class DispatcherServlet extends HttpServlet {
         defaultServlet.addMapping(ConfigHelper.getAppAssertPath() + "*");
     }
 
-    private ServletConfig servletConfig() {
-
-        return null;
-    }
-
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp)
+    protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String requestMethod = req.getMethod().toLowerCase();
+        String requestMethod = request.getMethod().toLowerCase();
+
+        String requestPath = request.getPathInfo();
+
+        Handler handler = ControllerHepler.getHandler(requestMethod, requestPath);
+        if (handler != null) {
+            Class<?> controllerClass = handler.getControllerClass();
+            Object controllerBean = BeanHelper.getBean(controllerClass);
+
+            Map<String, Object> paramMap = new HashMap<>();
+
+
+        }
 
     }
 }
