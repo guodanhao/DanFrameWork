@@ -5,6 +5,7 @@ import com.halo.framework.helper.BeanHelper;
 import com.halo.framework.helper.ConfigHelper;
 import com.halo.framework.helper.ControllerHepler;
 import com.halo.framework.helper.HelperLoader;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -63,7 +65,20 @@ public class DispatcherServlet extends HttpServlet {
 
             Map<String, Object> paramMap = new HashMap<>();
 
+            Enumeration<String> paramNames = request.getParameterNames();
 
+
+            // TODO 为何不放到param中
+            while (paramNames.hasMoreElements()) {
+
+                String paramName = paramNames.nextElement();
+
+                String paramValue = request.getParameter(paramName);
+
+                paramMap.put(paramName, paramValue);
+            }
+
+//            String body = CodecU
         }
 
     }
