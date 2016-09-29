@@ -29,3 +29,7 @@ public static long castLong(Object obj, long defaultValue) {
 ```
 ## servlet和spring mvc的不同
     spring mvc 就是把servlet进行了一次封装。利用了dispatcherServlet和handler的体系
+    
+## 公司解决重复提交方案
+API 传方法带入token，切面将token放到redis中，提交事务之后，
+（SupplyChainTransactionManager extends DataSourceTransactionManager），去clean redis中的token
