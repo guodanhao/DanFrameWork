@@ -4,5 +4,10 @@
     就是一个Comparator实例。你也可以自己实现一个自定义对象的排序方式来满足特定对象的要求，如果同样的对象一会想这样排序，一会想那样排序，
     就只需要使用不同的Comparator实例即可。
 
+## JAVA util中的class使用
+    抽时间把JAVA util和Apache common lang包中的所有Utils看一下
+    
+## 工具类的意义
+    把一些class抽取出来，让业务逻辑更加清晰
 
 文章来源：https://yq.aliyun.com/articles/20176
