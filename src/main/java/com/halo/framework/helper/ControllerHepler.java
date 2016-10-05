@@ -20,12 +20,12 @@ public final class ControllerHepler {
 
     static {
 
+        // 获得所有controllerClass
         Set<Class<?>> controllerClassSet = ClassHelper.getClassController();
 
         if (CollectionUtils.isNotEmpty(controllerClassSet)) {
 
-            for (Class<?> cls:controllerClassSet) {
-
+            for (Class<?> cls : controllerClassSet) {
                 Method[] methods =  cls.getDeclaredMethods();
 
                 if (ArrayUtils.isNotEmpty(methods)) {
