@@ -33,3 +33,11 @@ public static long castLong(Object obj, long defaultValue) {
 ## 公司解决重复提交方案
 API 传方法带入token，切面将token放到redis中，提交事务之后，
 （SupplyChainTransactionManager extends DataSourceTransactionManager），去clean redis中的token
+
+## 序列化
+原料想试一下序列化之后，文件能缩小多少。结果发现
+```
+String[] arg = new String[102400];
+```
+a.class文件只有1KB；
+a.class序列化之后文件有101KB；
